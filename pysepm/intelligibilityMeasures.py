@@ -208,7 +208,7 @@ def ncm(clean_speech,processed_speech,fs):
     F_SIGNAL = fs
 
     F_ENVELOPE  =   32 # limits modulations to 0<f<16 Hz      
-    M_CHANNELS  =   20
+    M_CHANNELS  =   20 # original 20
 
     #   DEFINE BAND EDGES
     BAND = get_band(M_CHANNELS, F_SIGNAL);
@@ -274,5 +274,6 @@ def ncm(clean_speech,processed_speech,fs):
 
         TI[k]= (asnr[k]+ 15)/ 30 # Eq.10 in [1]
 
+    WEIGHT=WEIGHT[:-1] # NOTE(jiatong): fix
     ncm_val= WEIGHT.dot(TI)/np.sum(WEIGHT) # Eq.11
     return ncm_val
